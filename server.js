@@ -3,7 +3,6 @@ import fileUpload from "express-fileupload";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import router from "./src/routes/index.routes.js";
-import { cors_options } from "./config/cors.js";
 import { error_handler } from "./src/middlewares/error.middleware.js";
 
 /* configuring .env via dotenv */
@@ -13,7 +12,14 @@ dotenv.config();
 const app = express();
 
 /* Using express middlewares on app */
-app.use(cors(cors_options));
+app.use(
+  cors({
+    origin: ["*"],
+    methods: ["GET", "POST", "DELETE", "PUT", "FETCH"],
+    allowedHeaders: ["Content-Type", "authorization"],
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: "50mb" }));
 app.use(fileUpload());
 
