@@ -14,7 +14,7 @@ const app = express();
 /* Using express middlewares on app */
 app.use(
   cors({
-    origin: ["*"],
+    origin: "*",
     methods: ["GET", "POST", "DELETE", "PUT", "FETCH"],
     allowedHeaders: ["Content-Type", "authorization"],
     credentials: true,
