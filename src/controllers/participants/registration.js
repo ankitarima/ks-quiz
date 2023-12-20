@@ -14,14 +14,7 @@ export const registartion = async_handler(async (req, res, next) => {
     score,
   } = req.body;
 
-  if (
-    !first_name ||
-    !email ||
-    !phone_number ||
-    !organization ||
-    !designation ||
-    !consent
-  ) {
+  if (!first_name || !email || !phone_number || !organization || !designation) {
     return next(new ErrorResponse(`Required fields are missing`, 200));
   }
 
@@ -48,6 +41,10 @@ export const registartion = async_handler(async (req, res, next) => {
     if (!participant[0]) {
       return next(new ErrorResponse("Unable to save scores right now", 200));
     }
+    return res.status(200).json({ success: false, data: existing_participant });
+  }
+
+  if (existing_participant) {
     return res.status(200).json({ success: false, data: existing_participant });
   }
 
