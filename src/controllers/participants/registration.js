@@ -27,7 +27,10 @@ export const registartion = async_handler(async (req, res, next) => {
     existing_participant.quiz_taken = 1;
 
     existing_participant.save();
-    return res.status(200).json({ success: true, data: existing_participant });
+    const updated = await db_connection.participant_model.findOne({
+      where: { email },
+    });
+    return res.status(200).json({ success: true, data: updated });
   }
 
   if (existing_participant) {
