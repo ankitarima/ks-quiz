@@ -39,7 +39,7 @@ app.get("/auth/logout", (req, res) => {
 app.use(error_handler);
 
 /* PORT and listening app */
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`server started on port [${port}] - http://localhost:${port}`);
 });
