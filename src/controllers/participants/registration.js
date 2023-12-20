@@ -50,3 +50,21 @@ export const registartion = async_handler(async (req, res, next) => {
 
   res.status(200).json({ success: true, data: participant });
 });
+
+export const login = async_handler(async (req, res, next) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return next(new ErrorResponse(`Required fields are missing`, 200));
+  }
+
+  const existing_participant = await db_connection.participant_model.findOne({
+    where: { email },
+  });
+
+  if (existing_participant) {
+    return res.status(200).json({ success: true, data: existing_participant });
+  }
+
+  res.status(200).json({ success: false, data: {} });
+});
