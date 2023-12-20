@@ -27,11 +27,11 @@ export const registartion = async_handler(async (req, res, next) => {
     existing_participant.quiz_taken = 1;
 
     existing_participant.save();
-    return res.status(200).json({ success: false, data: existing_participant });
+    return res.status(200).json({ success: true, data: existing_participant });
   }
 
   if (existing_participant) {
-    return res.status(200).json({ success: false, data: existing_participant });
+    return res.status(200).json({ success: true, data: existing_participant });
   }
 
   const participant = await db_connection.participant_model.create({
