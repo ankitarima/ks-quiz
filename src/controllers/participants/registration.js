@@ -23,24 +23,10 @@ export const registartion = async_handler(async (req, res, next) => {
   });
 
   if (existing_participant && score) {
-    const participant = await db_connection.participant_model.update(
-      {
-        first_name,
-        last_name,
-        email,
-        phone_number,
-        organization,
-        designation,
-        consent,
-        score,
-        quiz_taken: 1,
-      },
-      { where: { email } }
-    );
+    existing_participant.score = score;
+    existing_participant.quiz_taken = 1;
 
-    if (!participant[0]) {
-      return next(new ErrorResponse("Unable to save scores right now", 200));
-    }
+    existing_participant.save();
     return res.status(200).json({ success: false, data: existing_participant });
   }
 
