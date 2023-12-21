@@ -3,6 +3,7 @@ import db_connection from "../../models/index.js";
 import ErrorResponse from "../../utils/error.util.js";
 
 export const registartion = async_handler(async (req, res, next) => {
+  return res.status(200).json({ success: false, data: "Quiz have been closed" });
   const {
     first_name,
     last_name,
