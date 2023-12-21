@@ -22,7 +22,7 @@ export const registartion = async_handler(async (req, res, next) => {
     where: { email },
   });
 
-  if (existing_participant && score) {
+  if (existing_participant && score && existing_participant?.score === 0 && existing_participant?.quiz_taken !== 1) {
     existing_participant.score = score;
     existing_participant.quiz_taken = 1;
 
